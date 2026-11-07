@@ -59,7 +59,7 @@ function openForm(c=null){
 }
 function openDetails(c){
   const image=validImage(c.image_url)?`<img src="${safeText(c.image_url)}" alt="${safeText(c.name)}" referrerpolicy="no-referrer">`:`<div class="card-image"><span class="image-placeholder">✦</span></div>`;
-  const facts=[c.race&&`Раса: ${safeText(c.race)}`,c.character_class&&`Класс: ${safeText(c.character_class)}`,c.gender&&`Пол: ${safeText(c.gender)}`,c.age&&`Возраст: ${safeText(c.age)}`,c.height&&`Рост: ${safeText(c.height)}`].filter(Boolean).join("<br>");
+  const facts=[c.race&&`Раса: ${safeText(c.race)}`,c.character_class&&`Роль: ${safeText(c.character_class)}`,c.gender&&`Пол: ${safeText(c.gender)}`,c.age&&`Возраст: ${safeText(c.age)}`,c.height&&`Рост: ${safeText(c.height)}`].filter(Boolean).join("<br>");
   const sections=[["Внешность",c.appearance],["Характер",c.personality],["Биография",c.biography],["Отношения",c.relationships],["Особые заметки",c.notes]].filter(x=>x[1]);
   $("detail-content").innerHTML=`<div class="detail-hero">${image}<div><p class="eyebrow">ПЕРСОНАЖ</p><h2>${safeText(c.name)}</h2><div class="detail-facts">${facts}</div><div class="card-actions"><button class="primary" id="detail-edit">Редактировать</button></div></div></div>${sections.map(([h,t])=>`<section class="detail-section"><h3>${h}</h3><p>${safeText(t)}</p></section>`).join("")}`;
   $("detail-edit").addEventListener("click",()=>{detailDialog.close();openForm(c);});
