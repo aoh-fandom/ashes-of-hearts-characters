@@ -95,4 +95,22 @@ $("character-form").addEventListener("submit",async e=>{
   await loadCharacters();
 });
 
+// Первоначальная загрузка персонажей
 loadCharacters();
+
+// Живое обновление при изменениях в общей базе
+db.channel("characters-live")
+  .on(
+    "postgres_changes",
+    {
+      event: "*",
+      schema: "public",
+      table: "characters"
+    },
+    () => {
+      loadCharacters();
+    }
+  )
+  .subscribe((status) => {
+    console.log("Realtime status:", status);
+  });
