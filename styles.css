@@ -58,7 +58,7 @@ textarea{resize:vertical;min-height:76px}
 .field select {
   width: 100%;
   padding: 12px 14px;
-  border: 1px solid var(--border, rgba(255, 255, 255, 0.12));
+  border: 1px solid var(--border, rgba(51, 43, 49, 1));
   border-radius: 9px;
   background: #151318;
   color: inherit;
