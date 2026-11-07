@@ -51,4 +51,32 @@ textarea{resize:vertical;min-height:76px}
 .detail-section p{white-space:pre-wrap;color:#d7cfcc;line-height:1.65;margin:0}
 .site-footer{text-align:center;color:#61595d;font-size:.75rem;padding:25px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* Выпадающий список пола */
+.field select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  background-color: #19171d;
+  color: #f2edf5;
+  font: inherit;
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+  color-scheme: dark;
+}
+
+.field select:focus {
+  border-color: #a58aaf;
+  background-color: #211e26;
+}
+
+.field select option {
+  background-color: #19171d;
+  color: #f2edf5;
+  padding: 10px;
+}
+
 @media(max-width:620px){.toolbar{align-items:stretch;flex-direction:column}.toolbar button{width:100%}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.detail-hero{grid-template-columns:1fr}.detail-hero img{height:260px}.site-header{min-height:180px}}
