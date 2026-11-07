@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111014">
+  <title>Ashes of Hearts Characters</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <img class="logo" src="logo.png" alt="" onerror="this.hidden=true">
+    <h1>Ashes of Hearts Characters</h1>
+    <p class="connection" id="connection-status">Подключение к архиву…</p>
+  </header>
+
+  <main class="container">
+    <section class="toolbar">
+      <label class="search-wrap">
+        <span class="sr-only">Поиск персонажей</span>
+        <input id="search" type="search" placeholder="Поиск персонажей…" autocomplete="off">
+      </label>
+      <button class="primary" id="add-character">Добавить персонажа</button>
+    </section>
+
+    <section id="notice" class="notice" role="status" aria-live="polite"></section>
+    <section id="character-grid" class="character-grid" aria-live="polite"></section>
+    <p id="empty-state" class="empty" hidden>Персонажи пока не добавлены. Создай первую запись.</p>
+  </main>
+
+  <dialog id="character-dialog" class="dialog">
+    <form id="character-form" method="dialog">
+      <div class="dialog-head">
+        <div>
+          <p class="eyebrow" id="form-eyebrow">НОВАЯ ЗАПИСЬ</p>
+          <h2 id="form-title">Новый персонаж</h2>
+        </div>
+        <button type="button" class="icon-button" id="close-dialog" aria-label="Закрыть">×</button>
+      </div>
+      <input type="hidden" id="character-id">
+      <div class="form-grid">
+        <label class="field full">Имя персонажа *
+          <input id="name" required maxlength="120" placeholder="Имя">
+        </label>
+        <label class="field">Раса
+          <input id="race" maxlength="100">
+        </label>
+        <label class="field">Класс
+          <input id="character-class" maxlength="100">
+        </label>
+        <label class="field">Пол
+          <input id="gender" maxlength="60">
+        </label>
+        <label class="field">Возраст
+          <input id="age" maxlength="40">
+        </label>
+        <label class="field">Рост
+          <input id="height" maxlength="40">
+        </label>
+        <label class="field full">Ссылка на портрет
+          <input id="image-url" type="url" placeholder="https://…">
+          <span class="hint">Вставь прямую ссылку на изображение с фотохостинга.</span>
+        </label>
+        <label class="field full">Внешность
+          <textarea id="appearance" rows="3"></textarea>
+        </label>
+        <label class="field full">Характер
+          <textarea id="personality" rows="3"></textarea>
+        </label>
+        <label class="field full">Биография
+          <textarea id="biography" rows="4"></textarea>
+        </label>
+        <label class="field full">Отношения
+          <textarea id="relationships" rows="3"></textarea>
+        </label>
+        <label class="field full">Особые заметки
+          <textarea id="notes" rows="3"></textarea>
+        </label>
+      </div>
+      <p class="form-error" id="form-error"></p>
+      <div class="dialog-actions">
+        <button type="button" class="secondary" id="cancel-dialog">Отмена</button>
+        <button type="submit" class="primary" id="save-character">Сохранить</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="detail-dialog" class="dialog detail-dialog">
+    <div id="detail-content"></div>
+    <div class="dialog-actions">
+      <button class="secondary" id="close-detail">Закрыть</button>
+    </div>
+  </dialog>
+
+  <footer class="site-footer">Ashes of Hearts Characters</footer>
+</body>
+</html>
