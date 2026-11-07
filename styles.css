@@ -59,8 +59,8 @@ textarea{resize:vertical;min-height:76px}
   width: 100%;
   padding: 12px 14px;
   border: 1px solid var(--border, rgba(255, 255, 255, 0.12));
-  border-radius: inherit;
-  background: inherit;
+  border-radius: 9px;
+  background: #151318;
   color: inherit;
   font: inherit;
   outline: none;
