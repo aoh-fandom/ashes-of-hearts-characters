@@ -108,7 +108,26 @@ db.channel("characters-live")
       table: "characters"
     },
     () => {
-      loadCharacters();
+      // Загружаем каталог
+loadCharacters();
+
+// Отправляем информацию о посетителе
+async function sendPresence() {
+  const { error } = await db.functions.invoke(
+    "track-visitor",
+    { body: {} }
+  );
+
+  if (error) {
+    console.warn("Ошибка отслеживания:", error.message);
+  }
+}
+
+// Первый сигнал
+sendPresence();
+
+// Повторяем каждые 30 секунд
+setInterval(sendPresence, 30000);
     }
   )
   .subscribe((status) => {
