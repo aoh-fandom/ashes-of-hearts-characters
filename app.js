@@ -99,8 +99,13 @@ $("cancel-dialog").addEventListener("click", requestCloseEditor);
 $("close-detail").addEventListener("click",()=>detailDialog.close());
 //
 dialog.addEventListener("click", e => {
-  if (e.target === dialog) {
+  if (e.target !== dialog) return;
+
+  if (hasUnsavedChanges()) {
     requestCloseEditor();
+  } else {
+    originalFormData = null;
+    dialog.close();
   }
 });
 dialog.addEventListener("cancel", e => {
