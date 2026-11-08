@@ -113,4 +113,13 @@ textarea{resize:vertical;min-height:76px}
   flex: 1;
   min-width: 150px;
 }
+/* Закрепление панели поиска при прокрутке */
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #111014;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
 @media(max-width:620px){.toolbar{align-items:stretch;flex-direction:column}.toolbar button{width:100%}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.detail-hero{grid-template-columns:1fr}.detail-hero img{height:260px}.site-header{min-height:180px}}
