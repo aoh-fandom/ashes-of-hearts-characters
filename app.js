@@ -13,6 +13,33 @@ const grid = $("character-grid");
 const search = $("search");
 const dialog = $("character-dialog");
 const detailDialog = $("detail-dialog");
+const unsavedDialog = $("unsaved-dialog");
+let originalFormData = null;
+
+function getFormData() {
+  return fields.map(id => {
+    const element = $(
+      id === "character_class" ? "character-class" :
+      id === "image_url" ? "image-url" : id
+    );
+    return element.value;
+  });
+}
+
+function hasUnsavedChanges() {
+  if (!originalFormData) return false;
+
+  return JSON.stringify(getFormData()) !==
+         JSON.stringify(originalFormData);
+}
+
+function requestCloseEditor() {
+  if (hasUnsavedChanges()) {
+    unsavedDialog.showModal();
+  } else {
+    dialog.close();
+  }
+}
 
 function value(id){ return $(id).value.trim(); }
 function safeText(s){ return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
@@ -55,6 +82,7 @@ function openForm(c=null){
   $("form-error").textContent="";
   const map={"name":"name","race":"race","character-class":"character_class","gender":"gender","age":"age","height":"height","image-url":"image_url","appearance":"appearance","personality":"personality","biography":"biography","relationships":"relationships","notes":"notes"};
   for(const [id,key] of Object.entries(map)) $(id).value=c?.[key]??"";
+  originalFormData = getFormData();
   dialog.showModal();
 }
 function openDetails(c){
@@ -66,14 +94,28 @@ function openDetails(c){
   detailDialog.showModal();
 }
 $("add-character").addEventListener("click",()=>openForm());
-$("close-dialog").addEventListener("click",()=>dialog.close());
-$("cancel-dialog").addEventListener("click",()=>dialog.close());
+$("close-dialog").addEventListener("click", requestCloseEditor);
+$("cancel-dialog").addEventListener("click", requestCloseEditor);
 $("close-detail").addEventListener("click",()=>detailDialog.close());
 //
-detailDialog.addEventListener("click", e => {
-  if (e.target === detailDialog) {
-    detailDialog.close();
+dialog.addEventListener("click", e => {
+  if (e.target === dialog) {
+    requestCloseEditor();
   }
+});
+dialog.addEventListener("cancel", e => {
+  e.preventDefault();
+  requestCloseEditor();
+});
+
+$("continue-editing").addEventListener("click", () => {
+  unsavedDialog.close();
+});
+
+$("discard-changes").addEventListener("click", () => {
+  unsavedDialog.close();
+  originalFormData = null;
+  dialog.close();
 });
 //
 search.addEventListener("input",render);
@@ -97,6 +139,7 @@ $("character-form").addEventListener("submit",async e=>{
   $("save-character").disabled=false;
   $("save-character").textContent="Сохранить";
   if(result.error){ $("form-error").textContent="Не удалось сохранить: "+result.error.message;return; }
+  originalFormData = null;
   dialog.close();
   showNotice(id?"Изменения сохранены.":"Персонаж добавлен.");
   await loadCharacters();
