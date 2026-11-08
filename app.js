@@ -97,6 +97,11 @@ $("add-character").addEventListener("click",()=>openForm());
 $("close-dialog").addEventListener("click", requestCloseEditor);
 $("cancel-dialog").addEventListener("click", requestCloseEditor);
 $("close-detail").addEventListener("click",()=>detailDialog.close());
+detailDialog.addEventListener("click", e => {
+  if (e.target === detailDialog) {
+    detailDialog.close();
+  }
+});
 //
 dialog.addEventListener("click", e => {
   if (e.target !== dialog) return;
