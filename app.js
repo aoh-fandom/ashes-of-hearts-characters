@@ -69,6 +69,11 @@ $("add-character").addEventListener("click",()=>openForm());
 $("close-dialog").addEventListener("click",()=>dialog.close());
 $("cancel-dialog").addEventListener("click",()=>dialog.close());
 $("close-detail").addEventListener("click",()=>detailDialog.close());
+detailDialog.addEventListener("click", e => {
+  if (e.target === detailDialog) {
+    detailDialog.close();
+  }
+});
 search.addEventListener("input",render);
 
 $("character-form").addEventListener("submit",async e=>{
