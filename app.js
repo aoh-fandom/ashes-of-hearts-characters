@@ -69,11 +69,13 @@ $("add-character").addEventListener("click",()=>openForm());
 $("close-dialog").addEventListener("click",()=>dialog.close());
 $("cancel-dialog").addEventListener("click",()=>dialog.close());
 $("close-detail").addEventListener("click",()=>detailDialog.close());
+//
 detailDialog.addEventListener("click", e => {
   if (e.target === detailDialog) {
     detailDialog.close();
   }
 });
+//
 search.addEventListener("input",render);
 
 $("character-form").addEventListener("submit",async e=>{
@@ -138,3 +140,24 @@ setInterval(sendPresence, 30000);
   .subscribe((status) => {
     console.log("Realtime status:", status);
   });
+// Блокировка прокрутки страницы при открытых окнах
+function updatePageScroll() {
+  document.body.style.overflow =
+    (dialog.open || detailDialog.open) ? "hidden" : "";
+}
+
+dialog.addEventListener("close", updatePageScroll);
+detailDialog.addEventListener("close", updatePageScroll);
+
+dialog.addEventListener("click", e => {
+  if (e.target === dialog) {
+    dialog.close();
+  }
+});
+
+const originalShowModal = HTMLDialogElement.prototype.showModal;
+
+HTMLDialogElement.prototype.showModal = function () {
+  originalShowModal.call(this);
+  updatePageScroll();
+};
