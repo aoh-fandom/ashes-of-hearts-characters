@@ -105,6 +105,28 @@
       <button class="secondary" id="close-detail">Закрыть</button>
     </div>
   </dialog>
+  <dialog id="unsaved-dialog" class="dialog">
+  <div class="dialog-head">
+    <div>
+      <p class="eyebrow">НЕСОХРАНЁННЫЕ ИЗМЕНЕНИЯ</p>
+      <h2>Карточка редактируется</h2>
+    </div>
+  </div>
+
+  <p class="unsaved-message">
+    Ты изменил данные персонажа. Если закрыть окно сейчас,
+    все несохранённые изменения будут потеряны.
+  </p>
+
+  <div class="dialog-actions">
+    <button type="button" class="secondary" id="continue-editing">
+      Продолжить редактирование
+    </button>
+    <button type="button" class="primary" id="discard-changes">
+      Закрыть без сохранения
+    </button>
+  </div>
+</dialog>
 
   <footer class="site-footer">LLC "IMPOTENT" All rights reserved 2026 </footer>
 </body>
