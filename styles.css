@@ -76,5 +76,41 @@ textarea{resize:vertical;min-height:76px}
   background: #17151b;
   color: #f2edf5;
 }
+/* Окно предупреждения о несохранённых изменениях */
+#unsaved-dialog {
+  max-width: 480px;
+  width: calc(100% - 32px);
+  padding: 28px;
+}
 
+#unsaved-dialog::backdrop {
+  background: rgba(8, 7, 11, 0.82);
+  backdrop-filter: blur(5px);
+}
+
+#unsaved-dialog .dialog-head {
+  margin-bottom: 16px;
+}
+
+#unsaved-dialog h2 {
+  margin-bottom: 0;
+}
+
+#unsaved-dialog .unsaved-message {
+  color: var(--text-secondary, #aaa3b0);
+  line-height: 1.7;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+#unsaved-dialog .dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#unsaved-dialog button {
+  flex: 1;
+  min-width: 150px;
+}
 @media(max-width:620px){.toolbar{align-items:stretch;flex-direction:column}.toolbar button{width:100%}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.detail-hero{grid-template-columns:1fr}.detail-hero img{height:260px}.site-header{min-height:180px}}
